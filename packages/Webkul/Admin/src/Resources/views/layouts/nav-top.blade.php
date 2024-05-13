@@ -2,7 +2,7 @@
     <div class="navbar-top-left">
         <div class="brand-logo">
             <a href="{{ route('admin.dashboard.index') }}">
-                <img class="img img-reponsive" src="{{ asset('logo2.svg') }}" alt="{{ config('app.name') }}"/>
+                <img height="40px" class="img img-reponsive" src="{{ asset('logo2.svg') }}" alt="{{ config('app.name') }}"/>
             </a>
         </div>
     </div>
