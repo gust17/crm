@@ -4,7 +4,7 @@ namespace Webkul\Core;
 
 use Illuminate\Support\Facades\Event;
 
-class ViewRenderEventManager
+class   ViewRenderEventManager
 {
     /**
      * Contains all templates
