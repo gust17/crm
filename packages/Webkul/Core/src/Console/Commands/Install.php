@@ -118,14 +118,14 @@ class Install extends Command
             $input_admin_path = $this->ask('Please Enter the Admin URL : ');
             $this->envUpdate('APP_ADMIN_PATH=', $input_admin_path ?: $default_admin_path);
 
-            $locale = $this->choice('Please select the default available locale or press enter to continue', ['en'], 0);
+            $locale = $this->choice('Please select the default available locale or press enter to continue', ['en','pt-br'], 0);
             $this->envUpdate('APP_LOCALE=', $locale);
 
             $TimeZones = timezone_identifiers_list();
             $timezone = $this->anticipate('Please enter the default timezone', $TimeZones, date_default_timezone_get());
             $this->envUpdate('APP_TIMEZONE=', $timezone);
 
-            $currency = $this->choice('Please enter the default currency', ['USD', 'EUR'], 'USD');
+            $currency = $this->choice('Please enter the default currency', ['USD', 'EUR','BRL'], 'USD');
             $this->envUpdate('APP_CURRENCY=', $currency);
 
             $this->addDatabaseDetails();
@@ -139,6 +139,9 @@ class Install extends Command
      */
     protected function addDatabaseDetails()
     {
+        $dbHost = $this->ask('Qual url do banco ?');
+        $this->envUpdate('DB_HOST=', $dbHost);
+
         $dbName = $this->ask('What is the database name to be used by Krayin CRM ?');
         $this->envUpdate('DB_DATABASE=', $dbName);
 
@@ -160,6 +163,7 @@ class Install extends Command
         app()['env'] = $this->getEnvAtRuntime('APP_ENV');
 
         /* setting for the first time and then `.env` values will be incharged */
+        config(['database.connections.mysql.host' => $this->getEnvAtRuntime('DB_HOST')]);
         config(['database.connections.mysql.database' => $this->getEnvAtRuntime('DB_DATABASE')]);
         config(['database.connections.mysql.username' => $this->getEnvAtRuntime('DB_USERNAME')]);
         config(['database.connections.mysql.password' => $this->getEnvAtRuntime('DB_PASSWORD')]);
