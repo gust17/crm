@@ -46,7 +46,7 @@ return [
         'organizations' => 'Organizações',
         'organization' => 'Organização',
         'products' => 'Serviços',
-        'product' => 'Produto',
+        'product' => 'Serviço',
         'settings' => 'Configurações',
         'user' => 'Usuário',
         'user-info' => 'Gerencie todos os seus usuários e suas permissões no CRM, o que eles podem fazer.',
@@ -259,7 +259,7 @@ return [
         'bill-to'           => 'Cobrança para',
         'ship-to'           => 'Entrega para',
         'sku'               => 'SKU',
-        'product-name'      => 'Nome do Produto',
+        'product-name'      => 'Nome do Serviço',
         'search'            => 'Buscar...',
     ],
 
@@ -352,16 +352,16 @@ return [
 
     'products' => [
         'title'             => 'Serviços',
-        'product'           => 'Produto',
-        'create-title'      => 'Criar Produto',
-        'edit-title'        => 'Editar Produto',
-        'save-btn-title'    => 'Salvar como Produto',
+        'product'           => 'Serviço',
+        'create-title'      => 'Criar Serviço',
+        'edit-title'        => 'Editar Serviço',
+        'save-btn-title'    => 'Salvar como Serviço',
         'back'              => 'Voltar',
         'cancel'            => 'Cancelar',
-        'create-success'    => 'Produto criado com sucesso.',
-        'update-success'    => 'Produto atualizado com sucesso.',
-        'delete-success'    => 'Produto excluído com sucesso.',
-        'delete-failed'     => 'O Produto não pode ser excluído.',
+        'create-success'    => 'Serviço criado com sucesso.',
+        'update-success'    => 'Serviço atualizado com sucesso.',
+        'delete-success'    => 'Serviço excluído com sucesso.',
+        'delete-failed'     => 'O Serviço não pode ser excluído.',
     ],
 
 
