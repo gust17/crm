@@ -29,14 +29,14 @@ class QuoteController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Quote\Repositories\QuoteRepository  $quoteRepository
-     * @param \Webkul\Lead\Repositories\LeadRepository  $leadRepository
+     * @param \Webkul\Quote\Repositories\QuoteRepository $quoteRepository
+     * @param \Webkul\Lead\Repositories\LeadRepository $leadRepository
      *
      * @return void
      */
     public function __construct(
         QuoteRepository $quoteRepository,
-        LeadRepository $leadRepository
+        LeadRepository  $leadRepository
     )
     {
         $this->quoteRepository = $quoteRepository;
@@ -56,6 +56,8 @@ class QuoteController extends Controller
         if (request()->ajax()) {
             return app(QuoteDataGrid::class)->toJson();
         }
+
+        //dd('aqui');
 
         return view('admin::quotes.index');
     }
@@ -100,7 +102,7 @@ class QuoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -114,7 +116,7 @@ class QuoteController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Webkul\Attribute\Http\Requests\AttributeForm $request
-     * @param int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(AttributeForm $request, $id)
@@ -155,7 +157,7 @@ class QuoteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -172,7 +174,7 @@ class QuoteController extends Controller
             return response()->json([
                 'message' => trans('admin::app.response.destroy-success', ['name' => trans('admin::app.quotes.quote')]),
             ], 200);
-        } catch(\Exception $exception) {
+        } catch (\Exception $exception) {
             return response()->json([
                 'message' => trans('admin::app.response.destroy-failed', ['name' => trans('admin::app.quotes.quote')]),
             ], 400);
@@ -202,13 +204,15 @@ class QuoteController extends Controller
     /**
      * Print and download the for the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function print($id)
     {
         $quote = $this->quoteRepository->findOrFail($id);
-
+       // dd($quote);
+        return view('admin::quotes.pdf', compact('quote'));
+        //dd($quote);
         return PDF::loadHTML(view('admin::quotes.pdf', compact('quote'))->render())
             ->setPaper('a4')
             ->download('Quote_' . $quote->subject . '.pdf');

@@ -161,15 +161,7 @@ class QuoteDataGrid extends DataGrid
             },
         ]);
 
-        $this->addColumn([
-            'index'    => 'discount_amount',
-            'label'    => trans('admin::app.datagrid.discount'),
-            'type'     => 'string',
-            'sortable' => true,
-            'closure'  => function ($row) {
-                return core()->formatBasePrice($row->discount_amount, 2);
-            },
-        ]);
+
 
         $this->addColumn([
             'index'    => 'tax_amount',
@@ -181,15 +173,7 @@ class QuoteDataGrid extends DataGrid
             },
         ]);
 
-        $this->addColumn([
-            'index'    => 'adjustment_amount',
-            'label'    => trans('admin::app.datagrid.adjustment'),
-            'type'     => 'string',
-            'sortable' => true,
-            'closure'  => function ($row) {
-                return core()->formatBasePrice($row->adjustment_amount, 2);
-            },
-        ]);
+
 
         $this->addColumn([
             'index'    => 'grand_total',

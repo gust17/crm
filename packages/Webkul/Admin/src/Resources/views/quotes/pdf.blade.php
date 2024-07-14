@@ -121,6 +121,16 @@
                     <span class="label">{{ __('admin::app.quotes.valid-until') }} -</span>
                     <span class="value">{{ $quote->expired_at->format('d-m-Y') }}</span>
                 </div>
+                <div class="row">
+                    <span class="label">Data da Proposta-</span>
+
+                    @php
+
+
+                    @endphp
+
+                    <span class="value">{{ $quote->expired_at->format('d-m-Y') }}</span>
+                </div>
 
                 <div class="row">
                     <span class="label">{{ __('admin::app.quotes.sales-person') }} -</span>
@@ -130,35 +140,37 @@
                 <div class="table address">
                     <table>
                         <thead>
-                            <tr>
-                                <th style="width: 50%">{{ __('admin::app.quotes.bill-to') }}</th>
+                        <tr>
+                            <th style="width: 50%">Cliente Imediato</th>
 
-                                @if ($quote->shipping_address)
-                                    <th>{{ __('admin::app.quotes.ship-to') }}</th>
-                                @endif
-                            </tr>
+                            @if ($quote->shipping_address)
+                                <th>Cliente Final</th>
+                            @endif
+                        </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                @if ($quote->billing_address)
-                                    <td>
-                                        <p>{{ $quote->billing_address['address'] }}</p>
-                                        <p>{{ $quote->billing_address['postcode'] . ' ' .$quote->billing_address['city'] }} </p>
-                                        <p>{{ $quote->billing_address['state'] }}</p>
-                                        <p>{{ core()->country_name($quote->billing_address['country']) }}</p>
-                                    </td>
-                                @endif
+                        <tr>
+                            @if ($quote->billing_address)
+                                <td>
+                                    <p>{{ $quote->billing_address['address'] }}</p>
+                                    <p>{{ $quote->billing_address['postcode'] . ' ' .$quote->billing_address['city'] }} </p>
+                                    <p>{{ $quote->billing_address['state'] }}</p>
+                                    <p>{{ $quote->billing_address['country'] ? core()->country_name($quote->billing_address['country']) : 'N/A' }}
+                                    </p>
+                                </td>
+                            @endif
 
-                                @if ($quote->shipping_address)
-                                    <td>
-                                        <p>{{ $quote->shipping_address['address'] }}</p>
-                                        <p>{{ $quote->shipping_address['postcode'] . ' ' .$quote->shipping_address['city'] }} </p>
-                                        <p>{{ $quote->shipping_address['state'] }}</p>
-                                        <p>{{ core()->country_name($quote->shipping_address['country']) }}</p>
-                                    </td>
-                                @endif
-                            </tr>
+                            @if ($quote->shipping_address)
+                                <td>
+                                    <p>{{ $quote->shipping_address['address'] }}</p>
+                                    <p>{{ $quote->shipping_address['postcode'] . ' ' .$quote->shipping_address['city'] }} </p>
+                                    <p>{{ $quote->shipping_address['state'] }}</p>
+                                    <p>{{ isset($quote->billing_address['country']) ? core()->country_name($quote->billing_address['country']) : 'N/A' }}
+                                    </p>
+                                </td>
+                            @endif
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -166,48 +178,46 @@
                 <div class="table items">
                     <table>
                         <thead>
-                            <tr>
-                                <th>{{ __('admin::app.quotes.sku') }}</th>
+                        <tr>
+                            <th>UND</th>
 
-                                <th>{{ __('admin::app.quotes.product-name') }}</th>
+                            <th>{{ __('admin::app.quotes.product-name') }}</th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.price') }}</th>
+                            <th class="text-center">{{ __('admin::app.quotes.price') }}</th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.quantity') }}</th>
+                            <th class="text-center">{{ __('admin::app.quotes.quantity') }}</th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.amount') }}</th>
+                            <th class="text-center">{{ __('admin::app.quotes.amount') }}</th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.discount') }}</th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.tax') }}</th>
+                            <th class="text-center">{{ __('admin::app.quotes.tax') }}</th>
 
-                                <th class="text-center">{{ __('admin::app.quotes.grand-total') }}</th>
-                            </tr>
+                            <th class="text-center">{{ __('admin::app.quotes.grand-total') }}</th>
+                        </tr>
                         </thead>
 
                         <tbody>
 
-                            @foreach ($quote->items as $item)
-                                <tr>
-                                    <td>{{ $item->sku }}</td>
+                        @foreach ($quote->items as $item)
+                            <tr>
+                                <td>{{ $item->sku }}</td>
 
-                                    <td>
-                                        {{ $item->name }}
-                                    </td>
+                                <td>
+                                    {{ $item->name }}
+                                </td>
 
-                                    <td>{!! core()->formatBasePrice($item->price, true) !!}</td>
+                                <td>{!! core()->formatBasePrice($item->price, true) !!}</td>
 
-                                    <td class="text-center">{{ $item->quantity }}</td>
+                                <td class="text-center">{{ $item->quantity }}</td>
 
-                                    <td class="text-center">{!! core()->formatBasePrice($item->total, true) !!}</td>
+                                <td class="text-center">{!! core()->formatBasePrice($item->total, true) !!}</td>
 
-                                    <td class="text-center">{!! core()->formatBasePrice($item->discount_amount, true) !!}</td>
 
-                                    <td class="text-center">{!! core()->formatBasePrice($item->tax_amount, true) !!}</td>
-                                    
-                                    <td class="text-center">{!! core()->formatBasePrice($item->total + $item->tax_amount, true) !!}</td>
-                                </tr>
-                            @endforeach
+                                <td class="text-center">{!! core()->formatBasePrice($item->tax_amount, true) !!}</td>
+
+                                <td class="text-center">{!! core()->formatBasePrice($item->total + $item->tax_amount, true) !!}</td>
+                            </tr>
+                        @endforeach
 
                         </tbody>
                     </table>
@@ -227,17 +237,6 @@
                         <td>{!! core()->formatBasePrice($quote->tax_amount, true) !!}</td>
                     </tr>
 
-                    <tr>
-                        <td>{{ __('admin::app.quotes.discount') }}</td>
-                        <td>-</td>
-                        <td>{!! core()->formatBasePrice($quote->discount_amount, true) !!}</td>
-                    </tr>
-
-                    <tr>
-                        <td>{{ __('admin::app.quotes.adjustment') }}</td>
-                        <td>-</td>
-                        <td>{!! core()->formatBasePrice($quote->adjustment_amount, true) !!}</td>
-                    </tr>
 
                     <tr>
                         <td><strong>{{ __('admin::app.quotes.grand-total') }}</strong></td>

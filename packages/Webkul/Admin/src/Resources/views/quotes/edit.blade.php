@@ -54,13 +54,7 @@
                                             ->scopeQuery(function($query){
                                                 return $query
                                                     ->where('entity_type', 'quotes')
-                                                    ->whereIn('code', [
-                                                        'user_id',
-                                                        'subject',
-                                                        'description',
-                                                        'expired_at',
-                                                        'person_id',
-                                                    ]);
+                                                    ;
                                             })->get(),
                                         'customValidations'      => [
                                             'expired_at' => [
@@ -172,7 +166,7 @@
                                     <label class="required">
                                         {{ __('admin::app.quotes.quantity') }}
                                     </label>
-                                </div>                                
+                                </div>
                             </th>
 
                             <th class="price">
@@ -193,7 +187,7 @@
                                 </div>
                             </th>
 
-                            <th class="discount">                            
+                            <th class="discount">
                                 <div class="form-group">
                                     <label class="required">
                                         {{ __('admin::app.quotes.discount') }}
@@ -212,7 +206,7 @@
                             </th>
 
                             <th class="total">
-                                <div class="form-group">     
+                                <div class="form-group">
                                     {{ __('admin::app.quotes.total') }}
                                     <span class="currency-code">({{ core()->currencySymbol(config('app.currency')) }})</span>
                                     </div>
