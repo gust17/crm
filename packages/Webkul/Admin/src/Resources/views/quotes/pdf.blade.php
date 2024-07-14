@@ -124,12 +124,9 @@
                 <div class="row">
                     <span class="label">Data da Proposta-</span>
 
-                    @php
-
-
-                    @endphp
-
-                    <span class="value">{{ $quote->expired_at->format('d-m-Y') }}</span>
+                    <span class="value">
+    {{ $quote->getAttribute('dt_proposta') ? $quote->getAttribute('dt_proposta')->format('d-m-Y') : 'Data não disponível' }}
+</span>
                 </div>
 
                 <div class="row">

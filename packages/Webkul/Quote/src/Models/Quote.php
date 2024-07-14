@@ -19,6 +19,7 @@ class Quote extends Model implements QuoteContract
         'billing_address'  => 'array',
         'shipping_address' => 'array',
         'expired_at'       => 'datetime',
+        'dt_proposta'=>'date'
     ];
 
     /**
