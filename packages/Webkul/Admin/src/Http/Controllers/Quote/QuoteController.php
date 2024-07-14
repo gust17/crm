@@ -211,7 +211,7 @@ class QuoteController extends Controller
     {
         $quote = $this->quoteRepository->findOrFail($id);
        // dd($quote);
-        return view('admin::quotes.pdf', compact('quote'));
+        //return view('admin::quotes.pdf', compact('quote'));
         //dd($quote);
         return PDF::loadHTML(view('admin::quotes.pdf', compact('quote'))->render())
             ->setPaper('a4')
